@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Talos--威胁情报的王者 | 威胁情报与溯源分析</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="情报，对于现实社会犯罪活动的打击至关重要。而威胁情报，则是网络虚拟空间对付网络犯罪和网络威胁的核心“抓手”之一。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Talos--威胁情报的王者">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/Talos--威胁情报的王者/index.html">
+<meta property="og:site_name" content="威胁情报与溯源分析">
+<meta property="og:description" content="情报，对于现实社会犯罪活动的打击至关重要。而威胁情报，则是网络虚拟空间对付网络犯罪和网络威胁的核心“抓手”之一。">
+<meta property="og:image" content="http://www.aqniu.com/wp-content/uploads/2017/07/talos.jpg">
+<meta property="og:image" content="http://www.aqniu.com/wp-content/uploads/2017/07/Talos%E4%B8%80%E5%A4%A9%E7%9A%84%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E9%87%8F.jpg">
+<meta property="og:image" content="http://www.aqniu.com/wp-content/uploads/2017/07/Talos%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E7%BB%86%E5%88%86.jpg">
+<meta property="og:image" content="http://www.aqniu.com/wp-content/uploads/2017/07/%E5%9B%BE%E7%89%87-3-5.jpg">
+<meta property="og:updated_time" content="2017-07-30T08:01:02.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Talos--威胁情报的王者">
+<meta name="twitter:description" content="情报，对于现实社会犯罪活动的打击至关重要。而威胁情报，则是网络虚拟空间对付网络犯罪和网络威胁的核心“抓手”之一。">
+<meta name="twitter:image" content="http://www.aqniu.com/wp-content/uploads/2017/07/talos.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="威胁情报与溯源分析" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="威胁情报与溯源分析" rel="home"> 威胁情报与溯源分析 </a>
+            
+          </h1>
+          
+          
+            <div class="site-description">威胁情报与溯源分析技术分享站点</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/papers">论文研读</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/projects">开源项目</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/companies">相关公司</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于本站</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Talos--威胁情报的王者" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Talos--威胁情报的王者
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/07/30/Talos--威胁情报的王者/" class="article-date">
+	  <time datetime="2017-07-30T07:48:00.000Z" itemprop="datePublished">七月 30, 2017</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>情报，对于现实社会犯罪活动的打击至关重要。而威胁情报，则是网络虚拟空间对付网络犯罪和网络威胁的核心“抓手”之一。<br><a id="more"></a><br><img src="http://www.aqniu.com/wp-content/uploads/2017/07/talos.jpg" alt="image"></p>
+<p>2015年，一个名叫AnglerEK的网络犯罪钓鱼攻击恶意程序，横行全球网络，以每天9万用户的攻击速度，绑架用户电脑，向用户收取赎金，每年不法收入近6000万美元。当人们茫然无措的时候，思科内部的一个神秘团队开始出手。他们密切分析了Angler EK，发现其使用漏洞利用工具的代理服务器主要地址，深度分析到该地址的系统中的工具包操作之后，思科通过更新其网络产品重定向链接，实现对攻击行为的封锁，直接保护了50%以上的消费者免受感染。同时思科与执法部门合作，提供收集到的犯罪线索，帮助有效打击犯罪分子。</p>
+<p>只此一役，便让这个名叫“Talos”的神秘团队，在业界浮出水面，声名鹊起。在去年的思科网络安全报告中，它更是准确地预测了今年刚肆虐全球的勒索病毒相关特征与传播趋势。这个名为“Talos”的安全团队，已经成为负责维护思科生态系统内所有安全数据的情报团队。它每天阻止200亿次威胁和8000万次恶意DNS查询，接收160亿网站请求</p>
+<p><img src="http://www.aqniu.com/wp-content/uploads/2017/07/Talos%E4%B8%80%E5%A4%A9%E7%9A%84%E5%AE%89%E5%85%A8%E5%88%86%E6%9E%90%E9%87%8F.jpg" alt="image"><br> <strong>Talos一天的安全分析量</strong></p>
+<h1 id="什么是Talos？"><a href="#什么是Talos？" class="headerlink" title="什么是Talos？"></a>什么是Talos？</h1><p> 思科Talos由一流的威胁研究人员组成，借助思科的复杂高端系统支撑，通过分析恶意软件、漏洞、入侵行为，以及最新趋势，提供已知和未知的威胁信息，并将其对威胁情况的理解融入到思科的所有安全产品中。简而言之，思科Talos的使命是基于智能大数据分析技术，为用户提供最为全面，最为实时的威胁防御。</p>
+<p> Talos拥有超过250名研究人员和600名软件工程师，堪称网络安全行业最大的安全研究团队之一，其中不乏业界知名的网络安全大牛。Snort、ClamAV等开源工具和平台就是他们所写。<strong>其主要分为五个骨干团队：威胁情报、检测研究、引擎开发、漏洞研发以及外延服务。</strong></p>
+<p> 思科Talos团队的工作是处理大量的原始数据，从中提炼有价值和准确的威胁情报。然后将这些情报传送给检测研究团队，由后者转换为检测规则。这些规则会被引擎开发团队中的软件工程师用于开发安全产品中的检测恶意软件及攻击威胁的引擎。</p>
+<p> 而漏洞研发团队的主要工作是研究零日攻击，并与一些流行软件厂商合作，抢在网络犯罪分子之前，快速解决因漏洞带来的风险。</p>
+<p> 最后是Talos的外延团队，它的主要工作是分享其了解的总体网络威胁情况，把信息整理归纳并传递给外界，类似某些机构的通报中心。而且，任何客户只要购买了任何一款思科的安全产品，都可以免费获得思科Talos的威胁情报信息</p>
+<p><strong>以今年5月份全球爆发的勒索病毒WannaCry为例</strong>：</p>
+<p> 3月14日，微软安全公告发布SMB漏洞补丁(MS17-010)</p>
+<p> 同一天，Talos发布Snort签名防御MS17-010漏洞</p>
+<p> 4月14日，影子经纪人发布永恒之蓝与双子星漏洞利用</p>
+<p> 4月25日，Talos发布Snort签名防御双子星和匿名共享</p>
+<p> 5月12日，WannaCry开始出现大规模传播趋势</p>
+<p> 当日上午7:30，思科Talos博客宣布发现WannaCry攻击 </p>
+<p> 7:43，在全球将 kill switch 域推送到新的可见域类别</p>
+<p> 9:33，首次得到样本60分钟内，AMP在终端、电子邮件、Web 网关以及网络安全产品中实现成功检测和阻止</p>
+<p> 10:12，思科将其添加到勒索软件类别</p>
+<h1 id="Talos的威胁情报能力"><a href="#Talos的威胁情报能力" class="headerlink" title="Talos的威胁情报能力"></a>Talos的威胁情报能力</h1><p>在安全牛之前发布的文章中曾写道，“思科Talos采用自动化安全大数据方法分析来自全球的邮件、网站和超过1亿5千万网络终端设备的威胁情报。每天分析全球1/3的邮件总量（6千亿封邮件/每天），每天分析超过150万独立恶意软件样本，每天收集大约160亿网站的请求。举一个形象的例子，Google 每天搜索量大约为35亿次，思科Talos收集分析的量是这个数字的4.5倍。”</p>
+<p>之后，思科Talos与跨国电信运营商 Level 3 以及其他互联网供应商合作，使用黑洞法屏蔽了全球网络上所有 SSHPsychos 流量。对 SHPsychos 的反击成为该年度对黑客进行追缉的最大行动之一。由于其在阻止网络犯罪方面的贡献，Talos在网络安全这个圈子里备受称赞。</p>
+<p>除了250名全职威胁情报研究人员以外，思科在全球还部署了上百万个遥测代理、1100个威胁追捕程序，拥有4个全球数据中心和超过100家威胁情报合作伙伴。<strong>根据ESG去年发布的调查报告，在全球18家网络安全威胁情报最佳提供商中，思科位列第一：</strong></p>
+<ul>
+<li>1.Cisco</li>
+<li>2.IBM Security</li>
+<li>3.Microsoft</li>
+<li>4.Symantec(including Blue Coat)</li>
+<li>5.McAfee</li>
+<li>6.AWS</li>
+<li>7.Dell SecureWorks</li>
+<li>8.Check Point</li>
+<li>9.Kaspersky</li>
+<li>10.Palo Alto Networks</li>
+<li>11.RSA Security</li>
+<li>12.FireEye</li>
+<li>13.Forcepoint</li>
+<li>14.Fortinet</li>
+<li>15.Imperva</li>
+<li>16.Trend Micro</li>
+<li><ol>
+<li>Proofpoint</li>
+</ol>
+</li>
+<li><ol>
+<li>Sophos</li>
+</ol>
+</li>
+</ul>
+<p>(Source: ESG Research Survey, October 2016)</p>
+<p><img src="http://www.aqniu.com/wp-content/uploads/2017/07/Talos%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E7%BB%86%E5%88%86.jpg" alt="image"><br><strong>Talos威胁情报细分</strong></p>
+<h1 id="强大的终端遥测"><a href="#强大的终端遥测" class="headerlink" title="强大的终端遥测"></a>强大的终端遥测</h1><p>今年另一次大规模的恶意软件爆发，是Nyetya勒索软件。在病毒传播早期，由于监测到该活动影响的范围较广，Talos启动了称为TaCERS（Talos 重要事件响应系统）的内部研究和响应流程。TaCERS 将活动分为情报、遥测分析、反向工程、通信和检测研究，世界各地的Talos 研究人员和工程师共同应对此威胁。</p>
+<p>根据终端遥测的结果，明确了名为“M.E.Doc”的乌克兰会计软件数据包便是攻击活动的中心源，Nyetya正是通过所有M.E.Doc更新系统的安装实现传播。M.E.Doc 是由乌克兰一家名为 Intellect Service 的公司创建的会计数据包，它部署广泛，被用于与乌克兰税务系统进行交互。</p>
+<p>思科Talos主动直接联系到这家会计公司并建议提供援助，会计公司非常乐意的接受援助，并向前来调查的分析人员提供了日志文件和代码的使用权限。事件响应小组结合情报分析、逆向工程升级和遥测分析，确认了以下重要信息：</p>
+<hr>
+<p>攻击者窃取了 M.E.Doc 管理员的证书，得以登录服务器获得根权限，并修改了 NGINX Web 服务器的配置文件，导致访问 upd.me-doc.com.ua 的任何流量将通过更新服务器代理以及关联到 IP 为 176.31.182.167 的 OVH IP 空间内的主机。</p>
+<hr>
+<p>通过服务器上初次和最后的上游错误信息与现场终端遥测信息进行比较，Talos确定了攻击活动主动感染阶段的开始和结束时间，之后又确定了Nyetya的传播机制。</p>
+<p>当 M.E.Doc 设备执行初始样本时，命令行参数与在终端遥测所观察到数据完美匹配。<br><img src="http://www.aqniu.com/wp-content/uploads/2017/07/%E5%9B%BE%E7%89%87-3-5.jpg" alt="image"></p>
+<p>思科致力于为人们带来更加安全的高智能、高性能IT设备和产品。而以Talos团队威胁情报分析为核心的前沿技术，则成为思科网络安全产品发展的路径和趋势：构建以威胁防御为中心的安全集成架构。这种安全模式将覆盖整个攻击过程，减少各种各样的产品以及互相脱节的解决方案所造成的安全复杂性。</p>
+<p>原文来自安全牛，侵权立删<br><a href="http://www.aqniu.com/tools-tech/26940.html" target="_blank" rel="external">http://www.aqniu.com/tools-tech/26940.html</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'iTimeTraveler';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/23/威胁情报资源整合/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">威胁情报资源整合——awesome-threat-intelligence</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Talos？"><span class="nav-number">1.</span> <span class="nav-text">什么是Talos？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Talos的威胁情报能力"><span class="nav-number">2.</span> <span class="nav-text">Talos的威胁情报能力</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#强大的终端遥测"><span class="nav-number">3.</span> <span class="nav-text">强大的终端遥测</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/papers" class="mobile-nav-link">论文研读</a>
+  
+    <a href="/projects" class="mobile-nav-link">开源项目</a>
+  
+    <a href="/companies" class="mobile-nav-link">相关公司</a>
+  
+    <a href="/about" class="mobile-nav-link">关于本站</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 威胁情报与溯源分析 All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
