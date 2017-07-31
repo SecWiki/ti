@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Who Ran Leakedsource.com? | 威胁情报与溯源分析</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="A log file is an extremely valuable piece of information which is provided by a server. Almost all servers, services, and applications provide some sort of logging. But what is a log file? A log file">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Who Ran Leakedsource.com?">
+<meta property="og:url" content="http://yoursite.com/2017/07/31/Using Logs to Investigate a Web Application Attack/index.html">
+<meta property="og:site_name" content="威胁情报与溯源分析">
+<meta property="og:description" content="A log file is an extremely valuable piece of information which is provided by a server. Almost all servers, services, and applications provide some sort of logging. But what is a log file? A log file">
+<meta property="og:image" content="https://www.acunetix.com/wp-content/uploads/2016/05/post-attack-log-1.png">
+<meta property="og:image" content="https://www.acunetix.com/wp-content/uploads/2016/05/post-attack-log-2.png">
+<meta property="og:updated_time" content="2017-07-31T02:45:04.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Who Ran Leakedsource.com?">
+<meta name="twitter:description" content="A log file is an extremely valuable piece of information which is provided by a server. Almost all servers, services, and applications provide some sort of logging. But what is a log file? A log file">
+<meta name="twitter:image" content="https://www.acunetix.com/wp-content/uploads/2016/05/post-attack-log-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="威胁情报与溯源分析" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="威胁情报与溯源分析" rel="home"> 威胁情报与溯源分析 </a>
+            
+          </h1>
+          
+          
+            <div class="site-description">威胁情报与溯源分析技术分享站点</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/papers">论文研读</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/projects">开源项目</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/companies">相关公司</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于本站</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Using Logs to Investigate a Web Application Attack" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Who Ran Leakedsource.com?
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/07/31/Using Logs to Investigate a Web Application Attack/" class="article-date">
+	  <time datetime="2017-07-31T02:16:14.000Z" itemprop="datePublished">七月 31, 2017</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>A log file is an extremely valuable piece of information which is provided by a server. Almost all servers, services, and applications provide some sort of logging. But what is a log file? A log file records events and actions that take place during the runtime of a service or application.</p>
+<a id="more"></a>
+<p>So why are log files so important? Log files provide us with a precise view of the behavior of a server as well as critical information about when, how and “by whom” a server is being accessed. This kind of information can help us monitor the performance, troubleshoot and debug applications, as well as help forensic investigators unfold the chain of events that may have led to a malicious activity.</p>
+<p>Let’s take as an example a web server. Most commonly, Apache HTTP Server will provide two main log files – access.log and the error.log. The access.log records all requests for files. If a visitor requests www.example.com/main.php, the following entry will be added in the log file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">88.54.124.17 - - [16/Apr/2016:07:44:08 +0100] &quot;GET /main.php HTTP/1.1&quot; 200 203 &quot;-&quot; &quot;Mozilla/5.0 (Windows NT 6.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0&quot;</div></pre></td></tr></table></figure>
+<p>The above log describes that a visitor with an IP address of 88.54.124.178 requested main.php file on April 16th, 2016 07:44 and the request was successful.</p>
+<p>This information might not be too interesting, but what if the log file described that a visitor with IP 88.54.124.178 requested dump_database.php file on April 16th, 2016 07:44 and the request was successful?</p>
+<p>In the absence of that log file, you might have never known that someone discovered and ran a secret or restricted script you have on your website that dumps the database.</p>
+<p>Having established that a log file is a critical asset, let’s look at an everyday example of how a log file would help identify <strong>when, how</strong> and “<strong>by whom</strong>”a website was hacked.</p>
+<h1 id="Investigation"><a href="#Investigation" class="headerlink" title="Investigation"></a>Investigation</h1><p>Let’s assume that a website we administer got defaced. Let’s also assume that the site was a simple and up-to-date WordPress website running on a fully patched Ubuntu Server.<img src="https://www.acunetix.com/wp-content/uploads/2016/05/post-attack-log-1.png" alt="image"></p>
+<p>After reaching out for help, the forensic team took the server “offline” in order to be able to proceed with the investigation.</p>
+<p>Isolating the server is done to preserve the current state of the system and its logs, block remote access to the attacker (in the case a backdoor was installed), as well as prevent interaction with any other network machines.</p>
+<p>In order to fulfill the scope of the investigation, which is to identify malicious activity on the web server, the methodology would require the creation of a forensically sound copy of the server and then proceed with the investigation, however, since there are no plans to pursue legal action against the attacker, the forensic team can work on the original data.</p>
+<h1 id="Evidence-to-Look-for-in-an-Investigation"><a href="#Evidence-to-Look-for-in-an-Investigation" class="headerlink" title="Evidence to Look for in an Investigation"></a>Evidence to Look for in an Investigation</h1><p>In order to start an investigation, the investigator needs to identify what evidence to look for. Usually, evidence of an attack involves direct access to “hidden” or unusual files, access to the administration area with or without authentication, remote code execution, SQL injection, file inclusion, cross-site scripting (XSS) and other unusual behavior that might indicate vulnerability scanning or reconnaissance.</p>
+<p>Let us assume that for our example, the web-server’s access.log is available.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@secureserver:/var/log/apache2# less access.log</div></pre></td></tr></table></figure>
+<p>The access.log tends to be quite a large file, often containing thousands of recorded requests.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - - [16/Apr/2016:20:21:56 +0100] &quot;GET /john/index.php HTTP/1.1&quot; 200 3804 &quot;-&quot; &quot;Mozilla/5.0 (Windows NT 6.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0&quot;</div><div class="line">84.55.41.57 - - [16/Apr/2016:20:21:56 +0100] &quot;GET /john/assets/js/skel.min.js HTTP/1.1&quot; 200 3532 &quot;http://www.example.com/john/index.php&quot; &quot;Mozilla/5.0 (Windows NT 6.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0&quot;</div><div class="line">84.55.41.57 - - [16/Apr/2016:20:21:56 +0100] &quot;GET /john/images/pic01.jpg HTTP/1.1&quot; 200 9501 &quot;http://www.example.com/john/index.php&quot; &quot;Mozilla/5.0 (Windows NT 6.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0&quot;</div><div class="line">84.55.41.57 - - [16/Apr/2016:20:21:56 +0100] &quot;GET /john/images/pic03.jpg HTTP/1.1&quot; 200 5593 &quot;http://www.example.com/john/index.php&quot; &quot;Mozilla/5.0 (Windows NT 6.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0&quot;</div></pre></td></tr></table></figure>
+<p>Checking every single line would be impractical, so what we’ll want to do is to filter out data that would most probably be of no interest. That usually includes resources such as images and CSS stylesheets. Some investigators also prefer to strip out JavaScript files too.</p>
+<p>In this case, however, since the website is running WordPress, we will use a slightly different approach. Instead of ruling out some data, we will filter access.log for WordPress-specific characteristics.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@secureserver:~#cat /var/log/apache2/access.log | grep -E &quot;wp-admin|wp-login|POST /&quot;</div></pre></td></tr></table></figure>
+<p>The above command, will filter access.log and show only records that contain strings containing wp-admin which is the default administration folder of WordPress, wp-login which is part of the login file of WordPress (wp-login.php) and finally, POST which will show HTTP requests sent to the server using the POST method, which are most likely login form submissions.</p>
+<p>The output returns a number of results. After sifting through them, we’ll concentrate on the following single record:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - - [17/Apr/2016:06:52:07 +0100] &quot;GET /wordpress/wp-admin/ HTTP/1.1&quot; 200 12349 &quot;http://www.example.com/wordpress/wp-login.php&quot; &quot;Mozilla/5.0 (Windows NT 6.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0&quot;</div></pre></td></tr></table></figure>
+<p>We see that the IP ++84.55.41.57++ accessed the WordPress administration successfully.</p>
+<p>Let’s see what else the user with this IP address did. We’ll use grep once again to filter the access.log with that IP.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@secureserver:~#cat /var/log/apache2/access.log | grep 84.55.41.57</div></pre></td></tr></table></figure>
+<p>This results in the following interesting records.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - - [17/Apr/2016:06:57:24 +0100] &quot;GET /wordpress/wp-login.php HTTP/1.1&quot; 200 1568 &quot;-&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:06:57:31 +0100] &quot;POST /wordpress/wp-login.php HTTP/1.1&quot; 302 1150 &quot;http://www.example.com/wordpress/wp-login.php&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:06:57:31 +0100] &quot;GET /wordpress/wp-admin/ HTTP/1.1&quot; 200 12905 &quot;http://www.example.com/wordpress/wp-login.php&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:00:32 +0100] &quot;POST /wordpress/wp-admin/admin-ajax.php HTTP/1.1&quot; 200 454 &quot;http://www.example.com/wordpress/wp-admin/&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:00:58 +0100] &quot;GET /wordpress/wp-admin/theme-editor.php HTTP/1.1&quot; 200 20795 &quot;http://www.example.com/wordpress/wp-admin/&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:03:17 +0100] &quot;GET /wordpress/wp-admin/theme-editor.php?file=404.php&amp;theme=twentysixteen HTTP/1.1&quot; 200 8092 &quot;http://www.example.com/wordpress/wp-admin/theme-editor.php&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:11:48 +0100] &quot;GET /wordpress/wp-admin/plugin-install.php HTTP/1.1&quot; 200 12459 &quot;http://www.example.com/wordpress/wp-admin/plugin-install.php?tab=upload&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:16:06 +0100] &quot;GET /wordpress/wp-admin/update.php?action=install-plugin&amp;plugin=file-manager&amp;_wpnonce=3c6c8a7fca HTTP/1.1&quot; 200 5698 &quot;http://www.example.com/wordpress/wp-admin/plugin-install.php?tab=search&amp;s=file+permission&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:18:19 +0100] &quot;GET /wordpress/wp-admin/plugins.php?action=activate&amp;plugin=file-manager%2Ffile-manager.php&amp;_wpnonce=bf932ee530 HTTP/1.1&quot; 302 451 &quot;http://www.example.com/wordpress/wp-admin/update.php?action=install-plugin&amp;plugin=file-manager&amp;_wpnonce=3c6c8a7fca&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:21:46 +0100] &quot;GET /wordpress/wp-admin/admin-ajax.php?action=connector&amp;cmd=upload&amp;target=l1_d3AtY29udGVudA&amp;name%5B%5D=r57.php&amp;FILES=&amp;_=1460873968131 HTTP/1.1&quot; 200 731 &quot;http://www.example.com/wordpress/wp-admin/admin.php?page=file-manager_settings&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:22:53 +0100] &quot;GET /wordpress/wp-content/r57.php HTTP/1.1&quot; 200 9036 &quot;-&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:32:24 +0100] &quot;POST /wordpress/wp-content/r57.php?14 HTTP/1.1&quot; 200 8030 &quot;http://www.example.com/wordpress/wp-content/r57.php?14&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:29:21 +0100] &quot;GET /wordpress/wp-content/r57.php?29 HTTP/1.1&quot; 200 8391 &quot;http://www.example.com/wordpress/wp-content/r57.php?28&quot;</div><div class="line">84.55.41.57 - - [17/Apr/2016:07:57:31 +0100] &quot;POST /wordpress/wp-admin/admin-ajax.php HTTP/1.1&quot; 200 949 &quot;http://www.myw ebsite.com/wordpre ss/wp-admin/admin.php?page=file-manager_settings&quot;</div></pre></td></tr></table></figure>
+<p>Let’s analyze these records a bit further.<br>The attacker accessed the login screen.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-login.php 200</div></pre></td></tr></table></figure>
+<p>The attacker submitted the login form (HTTP request using the POST method) and was redirected (302 HTTP status code).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - POST /wordpress/wp-login.php 302</div></pre></td></tr></table></figure>
+<p>The attacker was redirected to wp-admin (the WordPress dashboard) which means authentication was successful.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-admin/ 200</div></pre></td></tr></table></figure>
+<p>The attacker navigated to the theme editor.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-admin/theme-editor.php 200</div></pre></td></tr></table></figure>
+<p>The attacker tried to edit file 404.php, which is a very common tactic used to inject malicious code into the file. The attacker most probably failed in doing so due to a lack of write permissions.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-admin/theme-editor.php?file=404.php&amp;theme= twentysixteen 200</div></pre></td></tr></table></figure>
+<p>The attacker accessed the plugin installer.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-admin/plugin-install.php 200</div></pre></td></tr></table></figure>
+<p>The attacker installed and activated the file-manager plugin.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-admin/update.php?action=install-plugin&amp;plugin= file-manager &amp;_wpnonce=3c6c8a7fca 200</div><div class="line">84.55.41.57 - GET /wordpress/wp-admin/plugins.php?action=activate&amp;plugin=file-manager%2Ffile-manager.php&amp;_wpnonce=bf932ee530 200</div></pre></td></tr></table></figure>
+<p>The attacker used the file-manager plugin to upload r57.php, which is a PHP webshell script.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-admin/admin-ajax.php?action=connector&amp; cmd= upload&amp;target=l1_d3AtY29udGVudA&amp;name%5B%5D=r57.php&amp;FILES=&amp;_=1460873968131 200</div></pre></td></tr></table></figure>
+<p>The log indicates that the attacker ran an r57 shell script. The query strings ?1 (the attacker ran phpinfo();) and ?28 (the attacker got a list of services) indicate navigation through the different sections of the shell script. It appears that he didn’t find anything interesting.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - GET /wordpress/wp-content/r57.php 200</div><div class="line">84.55.41.57 - POST /wordpress/wp-content/r57.php?1 200</div><div class="line">84.55.41.57 - GET /wordpress/wp-content/r57.php?28 200</div></pre></td></tr></table></figure>
+<p>The attacker’s last action was to edit the index file of the theme through the file-manager plugin and replaced its contents with the word “HACKED!”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">84.55.41.57 - POST /wordpress/wp-admin/admin-ajax.php 200 - http://www.</div><div class="line">example.com/wordpress/wp-admin/admin.php?page=file-manager_settings</div></pre></td></tr></table></figure>
+<p>Based on the above information, we now have a timeline of the attacker’s actions that led to the defacement of the website. However, there is a missing piece in the puzzle. How did the attacker get the login credentials in the first place?</p>
+<p>Assuming that we are certain that the administrator password was not leaked or bruteforced, let’s go back and see if we can find anything regarding this matter</p>
+<p>The current access.log did not contain any clues on what might have happened. However, there is more than just the one access.log file we were investigating. Apache HTTP Server’s log rotation, archived old log files. Listing the /var/log/apache2/ directory lists 4 additional log files. Let’s investigate.</p>
+<p>Firstly, we’ll filter the logs to see if any actions were taken by IP 84.55.41.57. One of the logs was bombarded with records that clearly indicate a SQL injection attack on what seems to be a custom plugin.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">84.55.41.57- - [14/Apr/2016:08:22:13 0100] &quot;GET /wordpress/wp-content/plugins/custom_plugin/check_user.php?userid=1 AND (SELECT 6810 FROM(SELECT COUNT(*),CONCAT(0x7171787671,(SELECT (ELT(6810=6810,1))),0x71707a7871,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.CHARACTER_SETS GROUP BY x)a) HTTP/1.1&quot; 200 166 &quot;-&quot; &quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2.3) Gecko/20100401 Firefox/4.0 (.NET CLR 3.5.30729)&quot;</div><div class="line">84.55.41.57- - [14/Apr/2016:08:22:13 0100] &quot;GET /wordpress/wp-content/plugins/custom_plugin/check_user.php?userid=(SELECT 7505 FROM(SELECT COUNT(*),CONCAT(0x7171787671,(SELECT (ELT(7505=7505,1))),0x71707a7871,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.CHARACTER_SETS GROUP BY x)a) HTTP/1.1&quot; 200 166 &quot;-&quot; &quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2.3) Gecko/20100401 Firefox/4.0 (.NET CLR 3.5.30729)&quot;</div><div class="line">84.55.41.57- - [14/Apr/2016:08:22:13 0100] &quot;GET /wordpress/wp-content/plugins/custom_plugin/check_user.php?userid=(SELECT CONCAT(0x7171787671,(SELECT (ELT(1399=1399,1))),0x71707a7871)) HTTP/1.1&quot; 200 166 &quot;-&quot; &quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2.3) Gecko/20100401 Firefox/4.0 (.NET CLR 3.5.30729)&quot;</div><div class="line">84.55.41.57- - [14/Apr/2016:08:22:27 0100] &quot;GET /wordpress/wp-content/plugins/custom_plugin/check_user.php?userid=1 UNION ALL SELECT CONCAT(0x7171787671,0x537653544175467a724f,0x71707a7871),NULL,NULL-- HTTP/1.1&quot; 200 182 &quot;-&quot; &quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2.3) Gecko/20100401 Firefox/4.0 (.NET CLR 3.5.30729)&quot;</div></pre></td></tr></table></figure>
+<p>Let’s assume that this plugin was created by copy-and-pasting some which the system administrator found online. The script was meant to check for a user’s validity based on a given ID. The plugin had a form exposed on the main page of the website which was sending an AJAX GET request to /wordpress/wp-content/plugins/custom_plugin/check_user.php.</p>
+<p>By analyzing check_user.php it is immediately obvious that the script is poorly written and vulnerable to a SQL injection attack.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">//Include the WordPress header</div><div class="line">include(&apos;/wordpress/wp-header.php&apos;);</div><div class="line">global $wpdb;</div><div class="line">// Use the GET parameter ‘userid’ as user input</div><div class="line">$id=$_GET[&apos;userid&apos;];</div><div class="line">// Make a query to the database with the value the user supplied in the SQL statement </div><div class="line">$users = $wpdb-&gt;get_results( &quot;SELECT * FROM users WHERE user_id=$id&quot;);</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<p>The amount of records in the access.log and the pattern indicate that the attacker used a SQL injection exploitation tool to exploit the SQL injection vulnerability.</p>
+<p>We will not dig deeper into the SQL injection attack, or <a href="https://www.acunetix.com/blog/articles/prevent-sql-injection-vulnerabilities-in-php-applications/" target="_blank" rel="external">how to fix SQL injection vulnerabilities </a>as this is outside the scope of this article, however, the records in the log would resemble the following.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/wordpress/wp-content/plugins/my_custom_plugin/check_user.php?userid=-6859 UNION ALL SELECT (SELECT CONCAT(0x7171787671,IFNULL(CAST(ID AS CHAR),0x20),0x616474686c76,IFNULL(CAST(display_name AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_activation_key AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_email AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_login AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_nicename AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_pass AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_registered AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_status AS CHAR),0x20),0x616474686c76,IFNULL(CAST(user_url AS CHAR),0x20),0x71707a7871) FROM wp.wp_users LIMIT 0,1),NULL,NULL--</div></pre></td></tr></table></figure>
+<p>The above is a very strong indication that the WordPress database has been compromised and that any data in that database has potentially been stolen.</p>
+<h1 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h1><p>Through this investigation, we can now create the chain of events that have led to this attack.<br><img src="https://www.acunetix.com/wp-content/uploads/2016/05/post-attack-log-2.png" alt="image"></p>
+<p>Some questions still remain, such as who was behind the attack. At this point, it is only possible to know the attacker’s IP address. It is very difficult, and probably infeasible, to attempt to attribute most attacks unless the attacker left concrete evidence that ties to a real person’s identity. Bear in mind that attackers frequently make use of proxies and anonymity networks such as Tor to conduct most attacks in order to mask their real location.</p>
+<p>The bottom line is that unsafe code that led to a SQL injection attack was present in a custom WordPress plugin. Had the site been tested for security vulnerabilities before being deployed in a production environment, it would not have been possible for the attacker to take advantage of the security vulnerability which caused the defacement.</p>
+<p>The attacker of the above fictitious example was very sloppy and left a significant amount of evidence and tracks which would have aided an investigator and made the investigation very easy. This, however, is not always the case, especially when dealing with more sophisticated attacks.</p>
+<p>Refere：<br><a href="https://dzone.com/articles/using-logs-to-investigate-a-web-application-attack" target="_blank" rel="external">https://dzone.com/articles/using-logs-to-investigate-a-web-application-attack</a></p>
+<p><a href="https://www.acunetix.com/blog/articles/using-logs-to-investigate-a-web-application-attack/" target="_blank" rel="external">https://www.acunetix.com/blog/articles/using-logs-to-investigate-a-web-application-attack/</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+        
+	<section id="comments" class="comment">
+	  <div id="disqus_thread">
+	  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+
+	<script type="text/javascript">
+	var disqus_shortname = 'iTimeTraveler';
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	(function(){
+	  var dsq = document.createElement('script');
+	  dsq.type = 'text/javascript';
+	  dsq.async = true;
+	  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	}());
+	</script>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/31/疑犯追踪：谁是Mirai蠕虫的幕后黑手？/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          疑犯追踪：谁是Mirai蠕虫的幕后黑手？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/30/Talos--威胁情报的王者/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Talos--威胁情报的王者</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Investigation"><span class="nav-number">1.</span> <span class="nav-text">Investigation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Evidence-to-Look-for-in-an-Investigation"><span class="nav-number">2.</span> <span class="nav-text">Evidence to Look for in an Investigation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Analysis"><span class="nav-number">3.</span> <span class="nav-text">Analysis</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/papers" class="mobile-nav-link">论文研读</a>
+  
+    <a href="/projects" class="mobile-nav-link">开源项目</a>
+  
+    <a href="/companies" class="mobile-nav-link">相关公司</a>
+  
+    <a href="/about" class="mobile-nav-link">关于本站</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 威胁情报与溯源分析 All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
